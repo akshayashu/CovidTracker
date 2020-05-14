@@ -1,6 +1,8 @@
 package com.example.covidtracker;
 
-public class stateData {
+import java.io.Serializable;
+
+public class stateData implements Serializable {
     private String sNo, stateName, actCase, recCase, deathCase;
 
     public stateData(String sNo, String stateName, String actCase, String recCase, String deathCase) {
