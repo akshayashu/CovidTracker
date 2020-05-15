@@ -314,18 +314,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Cases Graph"
+                android:text="Case-Chart"
                 android:layout_below="@+id/title"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:gravity="center"
                 android:textSize="24sp"
                 android:textColor="#B10BC6"/>
-            <com.anychart.AnyChartView
-                android:id="@+id/anyChart"
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
                 android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_height="250dp"
-                android:background="@drawable/round_background3"
                 android:layout_gravity="center_horizontal"
                 android:visibility="gone"/>
             <ProgressBar

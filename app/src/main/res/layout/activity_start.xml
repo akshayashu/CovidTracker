@@ -23,14 +23,28 @@
         android:text="CovidTracker"
         android:textColor="#FFFFFF"
         android:textSize="40sp" />
-    <ProgressBar
-        android:id="@+id/pBar"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:visibility="visible"
-        android:indeterminate="true"
-        android:indeterminateTintMode="src_atop"
-        android:indeterminateTint="@color/colorPrimaryDark"/>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/arapey"
+            android:text="Please wait, fetching the data.."
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"/>
+        <ProgressBar
+            android:id="@+id/pBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/colorPrimaryDark"/>
+    </LinearLayout>
 </LinearLayout>

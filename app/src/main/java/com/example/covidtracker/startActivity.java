@@ -9,11 +9,6 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.anychart.AnyChart;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.charts.Pie;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;

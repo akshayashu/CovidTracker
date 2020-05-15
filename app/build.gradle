@@ -12,7 +12,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
     }
 
     buildTypes {
@@ -34,6 +33,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'org.jsoup:jsoup:1.11.1'
     implementation "androidx.cardview:cardview:1.0.0"
-    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

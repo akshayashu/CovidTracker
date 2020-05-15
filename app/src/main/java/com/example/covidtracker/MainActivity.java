@@ -3,42 +3,37 @@ package com.example.covidtracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.charts.Pie;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView activeCases, recoveredCases, deathCases, whoLink, globalCases, IndiaCases;
     ListView listView;
     ProgressBar progressBar;
-
+    PieChart pieChart;
     ArrayList<stateData> stateList;
 
-    AnyChartView anyChartView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar =findViewById(R.id.progressBar);
         IndiaCases = findViewById(R.id.IndiaCases);
         globalCases = findViewById(R.id.globalCases);
-        anyChartView = findViewById(R.id.anyChart);
+        pieChart = findViewById(R.id.pieChart);
 
         whoLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,13 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
     private class Content extends AsyncTask<Void, Void, Void> {
         String active, recov, death, worldCases;
-        String[] graphName = {"Active", "Recovered", "Deaths"};
-        int[] graphNumber = new int[3];
-        String[] sNo = new String[33];
-        String[] sName = new String[33];
-        String[] sAct = new String[33];
-        String[] sRec = new String[33];
-        String[] sDeath = new String[33];
         long IndCases;
         @Override
         protected void onPreExecute() {
@@ -117,24 +105,29 @@ public class MainActivity extends AppCompatActivity {
                 listView.setAdapter(adapter);
                 Helper.getListViewSize(listView);
             }
-            graphNumber[0]=Integer.parseInt(active);
-            graphNumber[1]=Integer.parseInt(recov);
-            graphNumber[2]=Integer.parseInt(death);
             DecimalFormat formatter = new DecimalFormat("#,###,###,###");
             String yourFormattedString = formatter.format(IndCases);
             IndiaCases.setText(yourFormattedString);
             globalCases.setText(worldCases);
 
-            Pie pie = AnyChart.pie();
-            List<DataEntry> dataEntries = new ArrayList<>();
+            ArrayList<PieEntry> pie = new ArrayList<>();
+            pie.add(new PieEntry(Integer.parseInt(active),"Active"));
+            pie.add(new PieEntry(Integer.parseInt(recov),"Recovered"));
+            pie.add(new PieEntry(Integer.parseInt(death),"Deaths"));
 
-            for(int i=0;i<3;i++){
-                dataEntries.add(new ValueDataEntry(graphName[i],graphNumber[i]));
-            }
+            PieDataSet pieDataSet = new PieDataSet(pie,"         Rotatable Chart");
+            pieDataSet.setColors(new int[] { R.color.blue, R.color.green, R.color.red }, getApplicationContext());
+            pieDataSet.setValueTextColor(Color.BLACK);
+            pieDataSet.setValueTextSize(16f);
 
-            pie.data(dataEntries);
-            anyChartView.setChart(pie);
-            anyChartView.setVisibility(View.VISIBLE);
+            PieData pieData = new PieData(pieDataSet);
+            pieChart.setData(pieData);
+            pieChart.setVisibility(View.VISIBLE);
+            pieChart.getDescription().setEnabled(false);
+            pieChart.setCenterText("Total Cases");
+            pieChart.setEntryLabelColor(Color.BLACK);
+            pieChart.animate();
+
             progressBar.setVisibility(View.GONE);
         }
     }
