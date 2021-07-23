@@ -10,15 +10,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.covidtracker.models.Statewise;
 
-public class stateListAdapter extends ArrayAdapter<stateData> {
+import java.util.ArrayList;
+
+public class stateListAdapter extends ArrayAdapter<Statewise> {
     private static final String TAG = "stateListAdapter";
     Context mContext;
     int mResource;
 
-    public stateListAdapter(Context context, int resource, @NonNull ArrayList<stateData> objects) {
+    public stateListAdapter(Context context, int resource, @NonNull ArrayList<Statewise> objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.mResource = resource;
@@ -27,13 +28,13 @@ public class stateListAdapter extends ArrayAdapter<stateData> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        String sn = getItem(position).getsNo();
-        String stName = getItem(position).getStateName();
-        String totalAct = getItem(position).getActCase();
-        String totalRec = getItem(position).getRecCase();
-        String totalDeath = getItem(position).getDeathCase();
+        String sn = String.valueOf(position);
+        String stName = getItem(position).getState();
+        String totalAct = getItem(position).getActive();
+        String totalRec = getItem(position).getRecovered();
+        String totalDeath = getItem(position).getDeaths();
 
-        stateData stateData = new stateData(sn,stName,totalAct,totalRec,totalDeath);
+//        Statewise stateData = new Statewise(sn,stName,totalAct,totalRec,totalDeath);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource,parent,false);

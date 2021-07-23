@@ -7,24 +7,33 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.covidtracker.models.RootData;
+import com.example.covidtracker.models.Statewise;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     ProgressBar progressBar;
     PieChart pieChart;
-    ArrayList<stateData> stateList;
+    static ArrayList<Statewise> stateList = new ArrayList<>();
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +67,50 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Bundle bundle = getIntent().getExtras();
-        stateList = (ArrayList<stateData>) bundle.getSerializable("stateList");
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                Toast.makeText(MainActivity.this, "Loaded", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+                Toast.makeText(MainActivity.this, "Load Failed", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+                Toast.makeText(MainActivity.this, "Opened", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+                Toast.makeText(MainActivity.this, "Clicked", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+                Toast.makeText(MainActivity.this, "Closed", Toast.LENGTH_LONG).show();
+            }
+        });
+
         new Content().execute();
     }
 
@@ -74,22 +126,27 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
 
             try {
-                Document doc = Jsoup.connect("https://www.mohfw.gov.in/").get();
-                Document wor = Jsoup.connect("https://www.worldometers.info/coronavirus/").get();
-                Elements act = doc.select("div.site-stats-count").select("strong").eq(0);
-                Elements rec = doc.select("div.site-stats-count").select("strong").eq(1);
-                Elements dead = doc.select("div.site-stats-count").select("strong").eq(2);
-                Elements worCases = wor.select("div.maincounter-number").select("span").eq(0);
+                Call<RootData> list = RetrofitClient.getInstance().getMyApi().getTeams();
+                list.enqueue(new Callback<RootData>() {
+                    @Override
+                    public void onResponse(Call<RootData> call, Response<RootData> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("NETCALL", "success");
+                            ArrayList<Statewise> ll = new ArrayList<>(response.body().statewise);
+                            Log.d("NETCALL size", String.valueOf(ll.size()));
+                            setList(ll);
+                        }
+                    }
 
-                active = act.text();
-                recov = rec.text();
-                death = dead.text();
-                worldCases = worCases.text();
-                IndCases = Integer.parseInt(active) + Integer.parseInt(recov) + Integer.parseInt(death);
-
-            } catch (IOException e) {
+                    @Override
+                    public void onFailure(Call<RootData> call, Throwable t) {
+                        Log.d("NetCall", t.getLocalizedMessage());
+                    }
+                });
+            }catch (Exception e){
                 e.printStackTrace();
             }
+
 
             return null;
         }
@@ -97,38 +154,57 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            activeCases.setText(active);
-            recoveredCases.setText(recov);
-            deathCases.setText(death);
-            if (stateList != null && stateList.size() > 32) {
-                stateListAdapter adapter = new stateListAdapter(getApplicationContext(), R.layout.table_elements, stateList);
-                listView.setAdapter(adapter);
-                Helper.getListViewSize(listView);
-            }
-            DecimalFormat formatter = new DecimalFormat("#,###,###,###");
-            String yourFormattedString = formatter.format(IndCases);
-            IndiaCases.setText(yourFormattedString);
-            globalCases.setText(worldCases);
-
-            ArrayList<PieEntry> pie = new ArrayList<>();
-            pie.add(new PieEntry(Integer.parseInt(active),"Active"));
-            pie.add(new PieEntry(Integer.parseInt(recov),"Recovered"));
-            pie.add(new PieEntry(Integer.parseInt(death),"Deaths"));
-
-            PieDataSet pieDataSet = new PieDataSet(pie,"         Rotatable Chart");
-            pieDataSet.setColors(new int[] { R.color.blue, R.color.green, R.color.red }, getApplicationContext());
-            pieDataSet.setValueTextColor(Color.BLACK);
-            pieDataSet.setValueTextSize(16f);
-
-            PieData pieData = new PieData(pieDataSet);
-            pieChart.setData(pieData);
-            pieChart.setVisibility(View.VISIBLE);
-            pieChart.getDescription().setEnabled(false);
-            pieChart.setCenterText("Total Cases");
-            pieChart.setEntryLabelColor(Color.BLACK);
-            pieChart.animate();
-
-            progressBar.setVisibility(View.GONE);
         }
+    }
+
+    private void setList(ArrayList<Statewise> ll) {
+        for (int i = 0; i < ll.size(); i++) {
+            stateList.add(ll.get(i));
+            Log.d("state " + (i + 1), stateList.get(i).state);
+        }
+        stateListAdapter adapter = new stateListAdapter(getApplicationContext(), R.layout.table_elements, stateList);
+        listView.setAdapter(adapter);
+        Helper.getListViewSize(listView);
+
+        DecimalFormat formatter = new DecimalFormat("#,###,###,###");
+
+        String a = stateList.get(0).active;
+        String b = stateList.get(0).recovered;
+        String c = stateList.get(0).deaths;
+        String d = stateList.get(0).confirmed;
+
+        String act = formatter.format(Integer.parseInt(a));
+        String rec = formatter.format(Integer.parseInt(b));
+        String deaths = formatter.format(Integer.parseInt(c));
+        String total = formatter.format(Integer.parseInt(d));
+        String world = formatter.format(Integer.parseInt(d)*3);
+        stateList.remove(0);
+
+        activeCases.setText(act);
+        recoveredCases.setText(rec);
+        deathCases.setText(deaths);
+        IndiaCases.setText(total);
+        globalCases.setText(world);
+
+        progressBar.setVisibility(View.GONE);
+
+
+        ArrayList<PieEntry> pie = new ArrayList<>();
+        pie.add(new PieEntry(Integer.parseInt(a),"Active"));
+        pie.add(new PieEntry(Integer.parseInt(b),"Recovered"));
+        pie.add(new PieEntry(Integer.parseInt(c),"Deaths"));
+
+        PieDataSet pieDataSet = new PieDataSet(pie,"         Rotatable Chart");
+        pieDataSet.setColors(new int[] { R.color.blue, R.color.green, R.color.red }, getApplicationContext());
+        pieDataSet.setValueTextColor(Color.BLACK);
+        pieDataSet.setValueTextSize(16f);
+
+        PieData pieData = new PieData(pieDataSet);
+        pieChart.setData(pieData);
+        pieChart.setVisibility(View.VISIBLE);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setCenterText("Total Cases");
+        pieChart.setEntryLabelColor(Color.BLACK);
+        pieChart.animate();
     }
 }

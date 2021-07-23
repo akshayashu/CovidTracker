@@ -9,7 +9,8 @@
     android:background="@drawable/mainbk">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,11 +97,11 @@
                 android:orientation="horizontal"
                 android:gravity="center">
                 <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
                     android:orientation="vertical"
                     android:background="@drawable/round_background3"
-                    android:layout_margin="10dp">
+                    android:layout_margin="5dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -119,11 +120,11 @@
                         android:layout_marginTop="20dp"/>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
                     android:orientation="vertical"
                     android:background="@drawable/round_background1"
-                    android:layout_margin="10dp">
+                    android:layout_margin="5dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -142,11 +143,11 @@
                         android:layout_marginTop="20dp"/>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
                     android:orientation="vertical"
                     android:background="@drawable/round_background2"
-                    android:layout_margin="10dp">
+                    android:layout_margin="5dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -614,5 +615,14 @@
                 android:textColor="#FF0000"/>
         </LinearLayout>
     </ScrollView>
-
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
 </LinearLayout>
