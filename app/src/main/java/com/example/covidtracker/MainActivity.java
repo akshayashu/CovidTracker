@@ -1,7 +1,10 @@
 package com.example.covidtracker;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -23,10 +26,17 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.OnPaidEventListener;
+import com.google.android.gms.ads.ResponseInfo;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -37,12 +47,13 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView activeCases, recoveredCases, deathCases, whoLink, globalCases, IndiaCases;
+    TextView activeCases, recoveredCases, deathCases, whoLink, globalCases, IndiaCases, title;
     ListView listView;
     ProgressBar progressBar;
     PieChart pieChart;
     static ArrayList<Statewise> stateList = new ArrayList<>();
     private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +68,20 @@ public class MainActivity extends AppCompatActivity {
         IndiaCases = findViewById(R.id.IndiaCases);
         globalCases = findViewById(R.id.globalCases);
         pieChart = findViewById(R.id.pieChart);
+        title = findViewById(R.id.title);
+
+        loadIntAd();
+
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mInterstitialAd != null) {
+                    mInterstitialAd.show(MainActivity.this);
+                } else {
+                    Log.d("TAG", "The interstitial ad wasn't ready yet.");
+                }
+            }
+        });
 
         whoLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,12 +106,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdLoaded() {
                 // Code to be executed when an ad finishes loading.
+                super.onAdLoaded();
                 Toast.makeText(MainActivity.this, "Loaded", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onAdFailedToLoad(LoadAdError adError) {
                 // Code to be executed when an ad request fails.
+                super.onAdFailedToLoad(adError);
+                mAdView.loadAd(adRequest);
                 Toast.makeText(MainActivity.this, "Load Failed", Toast.LENGTH_LONG).show();
             }
 
@@ -94,12 +122,14 @@ public class MainActivity extends AppCompatActivity {
             public void onAdOpened() {
                 // Code to be executed when an ad opens an overlay that
                 // covers the screen.
+                super.onAdOpened();
                 Toast.makeText(MainActivity.this, "Opened", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onAdClicked() {
                 // Code to be executed when the user clicks on an ad.
+                super.onAdClicked();
                 Toast.makeText(MainActivity.this, "Clicked", Toast.LENGTH_LONG).show();
             }
 
@@ -107,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAdClosed() {
                 // Code to be executed when the user is about to return
                 // to the app after tapping on an ad.
+                super.onAdClosed();
                 Toast.makeText(MainActivity.this, "Closed", Toast.LENGTH_LONG).show();
             }
         });
@@ -206,5 +237,29 @@ public class MainActivity extends AppCompatActivity {
         pieChart.setCenterText("Total Cases");
         pieChart.setEntryLabelColor(Color.BLACK);
         pieChart.animate();
+    }
+
+    private void loadIntAd(){
+
+        AdRequest adRequest1 = new AdRequest.Builder().build();
+
+        InterstitialAd.load(this,"ca-app-pub-4970459579462716/4999405309", adRequest1,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+                        Log.i("TAG", "onAdLoaded");
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        Log.i("TAG", loadAdError.getMessage());
+                        mInterstitialAd = null;
+                        loadIntAd();
+                    }
+                });
     }
 }

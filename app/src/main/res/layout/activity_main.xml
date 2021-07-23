@@ -623,6 +623,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        ads:adSize="BANNER"
+        ads:adSize="FULL_BANNER"
         ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+<!--    ca-app-pub-4970459579462716/7924758026-->
 </LinearLayout>
