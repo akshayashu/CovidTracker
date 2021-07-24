@@ -114,8 +114,9 @@ public class MainActivity extends AppCompatActivity {
             public void onAdFailedToLoad(LoadAdError adError) {
                 // Code to be executed when an ad request fails.
                 super.onAdFailedToLoad(adError);
-                mAdView.loadAd(adRequest);
-                Toast.makeText(MainActivity.this, "Load Failed", Toast.LENGTH_LONG).show();
+                Log.d("TAG ADERROR", adError.toString());
+//                mAdView.loadAd(adRequest);
+//                Toast.makeText(MainActivity.this, "Load Failed", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -258,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
                         // Handle the error
                         Log.i("TAG", loadAdError.getMessage());
                         mInterstitialAd = null;
-                        loadIntAd();
+//                        loadIntAd();
                     }
                 });
     }
