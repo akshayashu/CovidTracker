@@ -28,7 +28,7 @@ public class stateListAdapter extends ArrayAdapter<Statewise> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        String sn = String.valueOf(position);
+        String sn = String.valueOf(position + 1);
         String stName = getItem(position).getState();
         String totalAct = getItem(position).getActive();
         String totalRec = getItem(position).getRecovered();

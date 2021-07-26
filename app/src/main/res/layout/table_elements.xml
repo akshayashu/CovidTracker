@@ -15,8 +15,9 @@
             android:id="@+id/sNo"
             android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:text=" S.No. "
-            android:textSize="20sp"
+            android:text="1"
+            android:padding="4dp"
+            android:textSize="18sp"
             android:gravity="center"
             android:layout_gravity="center"
             android:textColor="#000000"/>
@@ -28,10 +29,11 @@
             android:id="@+id/stateName"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="States/Union Territories"
+            android:text="Delhi"
+            android:padding="4dp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="#000000"/>
         <View
             android:layout_width="2dp"
@@ -41,11 +43,12 @@
             android:id="@+id/active"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:text=" A "
+            android:text=" 35 "
+            android:padding="4dp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textSize="20sp"
-            android:textColor="#003F97"/>
+            android:textSize="18sp"
+            android:textColor="@color/orange"/>
         <View
             android:layout_width="2dp"
             android:layout_height="match_parent"
@@ -54,11 +57,12 @@
             android:id="@+id/recovered"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:text=" R "
+            android:text=" 35 "
+            android:padding="4dp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textSize="20sp"
-            android:textColor="#1C7C01"/>
+            android:textSize="18sp"
+            android:textColor="@color/green"/>
         <View
             android:layout_width="2dp"
             android:layout_height="match_parent"
@@ -67,11 +71,12 @@
             android:id="@+id/deaths"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:text=" D "
+            android:text=" 1 "
+            android:padding="4dp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textSize="20sp"
-            android:textColor="#FF0000"/>
+            android:textSize="18sp"
+            android:textColor="@color/red"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"

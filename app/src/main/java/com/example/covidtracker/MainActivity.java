@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
         pie.add(new PieEntry(Integer.parseInt(c),"Deaths"));
 
         PieDataSet pieDataSet = new PieDataSet(pie,"         Rotatable Chart");
-        pieDataSet.setColors(new int[] { R.color.blue, R.color.green, R.color.red }, getApplicationContext());
+        pieDataSet.setColors(new int[] { R.color.orange, R.color.green, R.color.red }, getApplicationContext());
         pieDataSet.setValueTextColor(Color.BLACK);
         pieDataSet.setValueTextSize(16f);
 

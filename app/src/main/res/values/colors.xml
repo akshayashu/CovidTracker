@@ -5,6 +5,8 @@
     <color name="colorAccent">#6200EE</color>
     <color name="customized">#E80D0D</color>
     <color name="blue">#008DA6</color>
-    <color name="green">#60F337</color>
-    <color name="red">#FF0000</color>
+
+    <color name="orange">#FF9100</color>
+    <color name="green">#00E676</color>
+    <color name="red">#FF1744</color>
 </resources>

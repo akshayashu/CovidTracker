@@ -170,12 +170,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Symptoms"
+                android:textStyle="bold"
                 android:textSize="24sp"
                 android:layout_margin="10dp"
-                android:textColor="#16269C"/>
+                android:textColor="#009688"/>
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -195,7 +197,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Fever"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textColor="#000000"
                             android:layout_gravity="center"/>
                     </LinearLayout>
@@ -214,7 +216,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Dry Cough"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textColor="#000000"
                             android:layout_gravity="center"/>
                     </LinearLayout>
@@ -252,7 +254,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Tiredness"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textColor="#000000"
                             android:layout_gravity="center"/>
                     </LinearLayout>
@@ -271,7 +273,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Chills"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textColor="#000000"
                             android:layout_gravity="center"/>
                     </LinearLayout>
@@ -306,11 +308,6 @@
                         android:textColor="#FF0000"
                         android:layout_marginEnd="40dp"/>
                 </LinearLayout>
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </TableLayout>
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
@@ -320,8 +317,9 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:textSize="24sp"
-                android:textColor="#B10BC6"/>
+                android:textColor="#009688"/>
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pieChart"
                 android:layout_width="match_parent"
@@ -390,7 +388,7 @@
                             android:gravity="center"
                             android:layout_gravity="center"
                             android:textSize="20sp"
-                            android:textColor="#002963"/>
+                            android:textColor="@color/orange"/>
                         <View
                             android:layout_width="2dp"
                             android:layout_height="match_parent"
@@ -403,7 +401,7 @@
                             android:gravity="center"
                             android:layout_gravity="center"
                             android:textSize="20sp"
-                            android:textColor="#1C7C01"/>
+                            android:textColor="@color/green"/>
                         <View
                             android:layout_width="2dp"
                             android:layout_height="match_parent"
@@ -416,7 +414,7 @@
                             android:gravity="center"
                             android:layout_gravity="center"
                             android:textSize="20sp"
-                            android:textColor="#FF0000"/>
+                            android:textColor="@color/red"/>
                     </LinearLayout>
                     <View
                         android:layout_width="match_parent"
@@ -425,20 +423,22 @@
                     <ListView
                         android:id="@+id/listView"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"/>
+                        android:layout_height="fill_parent"
+                        tools:listitem="@layout/table_elements"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:background="#DDD6D6">
+                        android:background="@drawable/round_background6">
                         <TextView
                             android:layout_width="175dp"
                             android:layout_height="wrap_content"
                             android:text="A = Active cases"
                             android:gravity="center"
+                            android:padding="4dp"
                             android:layout_gravity="center"
-                            android:textSize="20sp"
-                            android:textColor="#003F97"/>
+                            android:textSize="16sp"
+                            android:textColor="@color/orange"/>
                         <View
                             android:layout_width="4dp"
                             android:layout_height="match_parent"
@@ -448,9 +448,10 @@
                             android:layout_height="wrap_content"
                             android:text="R = Recovered cases"
                             android:gravity="center"
+                            android:padding="4dp"
                             android:layout_gravity="center"
-                            android:textSize="20sp"
-                            android:textColor="#1C7C01"/>
+                            android:textSize="16sp"
+                            android:textColor="@color/green"/>
                         <View
                             android:layout_width="4dp"
                             android:layout_height="match_parent"
@@ -459,10 +460,11 @@
                             android:layout_width="175dp"
                             android:layout_height="wrap_content"
                             android:text="D = Deaths"
+                            android:padding="4dp"
                             android:gravity="center"
                             android:layout_gravity="center"
-                            android:textSize="20sp"
-                            android:textColor="#FF0000"/>
+                            android:textSize="16sp"
+                            android:textColor="@color/red"/>
                     </LinearLayout>
                     <View
                         android:layout_width="match_parent"
@@ -475,8 +477,9 @@
                 android:layout_height="wrap_content"
                 android:text="Precautions"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 android:layout_margin="10dp"
-                android:textColor="#16269C"/>
+                android:textColor="#009688"/>
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -500,7 +503,7 @@
                             android:layout_height="wrap_content"
                             android:text="Wash your hands frequently"
                             android:gravity="center"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textColor="#000000"
                             android:layout_gravity="center"/>
                     </LinearLayout>
@@ -519,7 +522,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Social Distancing"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:layout_gravity="center"/>
@@ -539,7 +542,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Avoid touching your pretty face"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:gravity="center"
                             android:textColor="#000000"
                             android:layout_gravity="center"/>
@@ -559,7 +562,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Stay Home\n#StaySafe"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textColor="#000000"
                             android:layout_gravity="center"/>
                     </LinearLayout>
@@ -606,13 +609,16 @@
                 </LinearLayout>
             </HorizontalScrollView>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
                 android:text="***Developed by Akshay Khanna***"
-                android:textSize="16sp"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:padding="4dp"
+                android:background="@color/green"
                 android:layout_gravity="center"
-                android:textColor="#FF0000"/>
+                android:textColor="#000000"/>
         </LinearLayout>
     </ScrollView>
     <com.google.android.gms.ads.AdView
@@ -623,5 +629,4 @@
         android:layout_gravity="center"
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-4970459579462716/7924758026"/>
-<!--    ca-app-pub-3940256099942544/6300978111-->
 </LinearLayout>
