@@ -10,7 +10,6 @@ public class Helper {
     public static void getListViewSize(ListView myListView) {
         ListAdapter myListAdapter = myListView.getAdapter();
         if (myListAdapter == null) {
-            //do nothing return null
             return;
         }
         //set listAdapter in loop for getting final size
@@ -24,7 +23,5 @@ public class Helper {
         ViewGroup.LayoutParams params = myListView.getLayoutParams();
         params.height = totalHeight + (myListView.getDividerHeight() * (myListAdapter.getCount() - 1));
         myListView.setLayoutParams(params);
-        // print height of adapter on log
-        Log.i("height of listItem:", String.valueOf(totalHeight));
     }
 }

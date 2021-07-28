@@ -1,5 +1,6 @@
 package com.example.covidtracker;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,6 @@ import com.example.covidtracker.models.Statewise;
 import java.util.ArrayList;
 
 public class stateListAdapter extends ArrayAdapter<Statewise> {
-    private static final String TAG = "stateListAdapter";
     Context mContext;
     int mResource;
 
@@ -25,6 +25,7 @@ public class stateListAdapter extends ArrayAdapter<Statewise> {
         this.mResource = resource;
     }
 
+    @SuppressLint("ViewHolder")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -33,9 +34,6 @@ public class stateListAdapter extends ArrayAdapter<Statewise> {
         String totalAct = getItem(position).getActive();
         String totalRec = getItem(position).getRecovered();
         String totalDeath = getItem(position).getDeaths();
-
-//        Statewise stateData = new Statewise(sn,stName,totalAct,totalRec,totalDeath);
-
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource,parent,false);
 

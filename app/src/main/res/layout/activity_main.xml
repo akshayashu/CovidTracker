@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:background="@drawable/mainbk">
@@ -26,7 +25,7 @@
                     android:layout_marginTop="35dp"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/arapey"
-                    android:text="Covid - 19\nCases"
+                    android:text="Covid 19\nCases"
                     android:textColor="#000000"
                     android:textSize="32sp" />
 
@@ -34,7 +33,8 @@
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:scaleType="centerCrop"
-                    android:layout_alignParentRight="true"
+                    android:contentDescription="@string/todo"
+                    android:layout_alignParentEnd="true"
                     android:src="@drawable/doc" />
             </RelativeLayout>
             <LinearLayout
@@ -51,7 +51,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Global Cases"
+                        android:text="@string/global_cases"
                         android:textSize="16sp"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
@@ -75,7 +75,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="India's Cases"
+                        android:text="@string/india_s_cases"
                         android:textSize="16sp"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
@@ -105,7 +105,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Active Case"
+                        android:text="@string/active_case"
                         android:textSize="16sp"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
@@ -128,7 +128,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Recovered"
+                        android:text="@string/recovered"
                         android:textSize="16sp"
                         android:layout_marginTop="10dp"
                         android:layout_gravity="center"
@@ -151,7 +151,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Deaths"
+                        android:text="@string/deaths"
                         android:textSize="16sp"
                         android:layout_marginTop="10dp"
                         android:layout_gravity="center"
@@ -169,7 +169,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Symptoms"
+                android:text="@string/symptoms"
                 android:textStyle="bold"
                 android:textSize="24sp"
                 android:layout_margin="10dp"
@@ -179,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp">
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <LinearLayout
@@ -191,12 +191,13 @@
                         <ImageView
                             android:layout_width="90dp"
                             android:layout_height="90dp"
+                            android:contentDescription="@string/todo"
                             android:background="@drawable/fever"
                             android:layout_gravity="center"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Fever"
+                            android:text="@string/fever"
                             android:textSize="14sp"
                             android:textColor="#000000"
                             android:layout_gravity="center"/>
@@ -210,12 +211,13 @@
                         <ImageView
                             android:layout_width="90dp"
                             android:layout_height="90dp"
+                            android:contentDescription="@string/todo"
                             android:background="@drawable/cough"
                             android:layout_gravity="center"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Dry Cough"
+                            android:text="@string/dry_cough"
                             android:textSize="14sp"
                             android:textColor="#000000"
                             android:layout_gravity="center"/>
@@ -229,12 +231,13 @@
                         <ImageView
                             android:layout_width="90dp"
                             android:layout_height="90dp"
+                            android:contentDescription="@string/todo"
                             android:background="@drawable/difficult_breathing"
                             android:layout_gravity="center"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Difficulty Breathing"
+                            android:text="@string/difficulty_breathing"
                             android:textSize="14sp"
                             android:textColor="#000000"
                             android:layout_gravity="center"/>
@@ -248,12 +251,13 @@
                         <ImageView
                             android:layout_width="90dp"
                             android:layout_height="90dp"
+                            android:contentDescription="@string/todo"
                             android:background="@drawable/tiredness"
                             android:layout_gravity="center"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tiredness"
+                            android:text="@string/tiredness"
                             android:textSize="14sp"
                             android:textColor="#000000"
                             android:layout_gravity="center"/>
@@ -268,11 +272,12 @@
                             android:layout_width="90dp"
                             android:layout_height="90dp"
                             android:background="@drawable/chills"
+                            android:contentDescription="@string/todo"
                             android:layout_gravity="center"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Chills"
+                            android:text="@string/chills"
                             android:textSize="14sp"
                             android:textColor="#000000"
                             android:layout_gravity="center"/>
@@ -288,6 +293,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:contentDescription="@string/todo"
                     android:src="@drawable/info"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -298,13 +304,14 @@
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
                         android:textColor="#FFFFFF"
-                        android:text="Get the latest info from the MoHFW about COVID-19"/>
+                        android:text="@string/get_the_latest_info_from_the_mohfw_about_covid_19"/>
                     <TextView
                         android:id="@+id/whoLink"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Click here              \n"
+                        android:text="@string/click_here_n"
                         android:textSize="24sp"
+                        android:padding="8dp"
                         android:textColor="#FF0000"
                         android:layout_marginEnd="40dp"/>
                 </LinearLayout>
@@ -312,8 +319,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Case-Chart"
-                android:layout_below="@+id/title"
+                android:text="@string/case_chart"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:gravity="center"
@@ -342,7 +348,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <View
@@ -358,7 +364,7 @@
                             android:id="@+id/sNo"
                             android:layout_width="55dp"
                             android:layout_height="wrap_content"
-                            android:text=" S.No. "
+                            android:text="@string/s_no"
                             android:textSize="20sp"
                             android:gravity="center"
                             android:layout_gravity="center"
@@ -371,7 +377,7 @@
                             android:id="@+id/stateName"
                             android:layout_width="200dp"
                             android:layout_height="wrap_content"
-                            android:text="States/Union Territories"
+                            android:text="@string/states_union_territories"
                             android:gravity="center"
                             android:layout_gravity="center"
                             android:textSize="20sp"
@@ -384,7 +390,7 @@
                             android:id="@+id/active"
                             android:layout_width="90dp"
                             android:layout_height="wrap_content"
-                            android:text=" A "
+                            android:text="@string/a"
                             android:gravity="center"
                             android:layout_gravity="center"
                             android:textSize="20sp"
@@ -397,7 +403,7 @@
                             android:id="@+id/recovered"
                             android:layout_width="90dp"
                             android:layout_height="wrap_content"
-                            android:text=" R "
+                            android:text="@string/r"
                             android:gravity="center"
                             android:layout_gravity="center"
                             android:textSize="20sp"
@@ -410,7 +416,7 @@
                             android:id="@+id/deaths"
                             android:layout_width="90dp"
                             android:layout_height="wrap_content"
-                            android:text=" D "
+                            android:text="@string/d"
                             android:gravity="center"
                             android:layout_gravity="center"
                             android:textSize="20sp"
@@ -424,48 +430,9 @@
                         android:id="@+id/listView"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        tools:listitem="@layout/table_elements"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:background="@drawable/round_background6">
-                        <TextView
-                            android:layout_width="175dp"
-                            android:layout_height="wrap_content"
-                            android:text="A = Active cases"
-                            android:gravity="center"
-                            android:padding="4dp"
-                            android:layout_gravity="center"
-                            android:textSize="16sp"
-                            android:textColor="@color/orange"/>
-                        <View
-                            android:layout_width="4dp"
-                            android:layout_height="match_parent"
-                            android:background="#000000"/>
-                        <TextView
-                            android:layout_width="175dp"
-                            android:layout_height="wrap_content"
-                            android:text="R = Recovered cases"
-                            android:gravity="center"
-                            android:padding="4dp"
-                            android:layout_gravity="center"
-                            android:textSize="16sp"
-                            android:textColor="@color/green"/>
-                        <View
-                            android:layout_width="4dp"
-                            android:layout_height="match_parent"
-                            android:background="#000000"/>
-                        <TextView
-                            android:layout_width="175dp"
-                            android:layout_height="wrap_content"
-                            android:text="D = Deaths"
-                            android:padding="4dp"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            android:textSize="16sp"
-                            android:textColor="@color/red"/>
-                    </LinearLayout>
+                        tools:listitem="@layout/table_elements"
+                        tools:ignore="NestedScrolling" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
@@ -475,7 +442,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Precautions"
+                android:text="@string/precautions"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
@@ -484,7 +451,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <LinearLayout
@@ -497,11 +464,12 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:background="@drawable/hand_wash"
+                            android:contentDescription="@string/todo"
                             android:layout_gravity="center"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Wash your hands frequently"
+                            android:text="@string/wash_your_hands_frequently"
                             android:gravity="center"
                             android:textSize="14sp"
                             android:textColor="#000000"
@@ -514,6 +482,7 @@
                         android:layout_margin="5dp"
                         android:background="@drawable/round_background4">
                         <ImageView
+                            android:contentDescription="@string/todo"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:background="@drawable/social_distancing"
@@ -521,7 +490,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Social Distancing"
+                            android:text="@string/social_distancing"
                             android:textSize="14sp"
                             android:gravity="center"
                             android:textColor="#000000"
@@ -534,6 +503,7 @@
                         android:layout_margin="5dp"
                         android:background="@drawable/round_background4">
                         <ImageView
+                            android:contentDescription="@string/todo"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:background="@drawable/avoid_touching"
@@ -541,7 +511,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Avoid touching your pretty face"
+                            android:text="@string/avoid_touching_your_pretty_face"
                             android:textSize="14sp"
                             android:gravity="center"
                             android:textColor="#000000"
@@ -557,7 +527,8 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:background="@drawable/stay_home"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/todo" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -576,11 +547,12 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:background="@drawable/medical_support"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/todo" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="If you've any of the above symptoms, seek medical support"
+                            android:text="@string/if_you_ve_any_of_the_above_symptoms_seek_medical_support"
                             android:textSize="14sp"
                             android:gravity="center"
                             android:textColor="#000000"
@@ -596,11 +568,12 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:background="@drawable/follow_instructions"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/todo" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Follow the directions of your local health authority"
+                            android:text="@string/follow_the"
                             android:textSize="14sp"
                             android:gravity="center"
                             android:textColor="#000000"
@@ -612,7 +585,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="***Developed by Akshay Khanna***"
+                android:text="@string/developed_by_akshay_khanna"
                 android:textSize="14sp"
                 android:gravity="center"
                 android:padding="4dp"

@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">CovidTracker</string>
+    <string name="global_cases">Global Cases</string>
+    <string name="india_s_cases">India\'s Cases</string>
+    <string name="active_case">Active Case</string>
+    <string name="recovered">Recovered</string>
+    <string name="deaths">Deaths</string>
+    <string name="symptoms">Symptoms</string>
+    <string name="fever">Fever</string>
+    <string name="dry_cough">Dry Cough</string>
+    <string name="difficulty_breathing">Difficulty Breathing</string>
+    <string name="tiredness">Tiredness</string>
+    <string name="chills">Chills</string>
+    <string name="get_the_latest_info_from_the_mohfw_about_covid_19">Get the latest info from the MoHFW about COVID-19</string>
+    <string name="click_here_n">Click here</string>
+    <string name="case_chart">Case-Chart</string>
+    <string name="s_no">S.No.</string>
+    <string name="states_union_territories">States/Union Territories</string>
+    <string name="a">A</string>
+    <string name="r">R</string>
+    <string name="d">D</string>
+    <string name="a_active_cases">A = Active cases</string>
+    <string name="r_recovered_cases">R = Recovered cases</string>
+    <string name="wash_your_hands_frequently">Wash your hands frequently</string>
+    <string name="social_distancing">Social Distancing</string>
+    <string name="avoid_touching_your_pretty_face">Avoid touching your pretty face</string>
+    <string name="if_you_ve_any_of_the_above_symptoms_seek_medical_support">If you\'ve any of the above symptoms, seek medical support</string>
+    <string name="follow_the">Follow the directions of your local health authority</string>
+    <string name="developed_by_akshay_khanna">***Developed by Akshay Khanna***</string>
+    <string name="todo">TODO</string>
+    <string name="precautions">Precautions</string>
+    <string name="covidtracker">CovidTracker</string>
+    <string name="please_wait_fetching_the_data">Please wait, fetching the data..</string>
 </resources>

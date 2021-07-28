@@ -1,10 +1,7 @@
 package com.example.covidtracker;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -26,11 +23,8 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.OnPaidEventListener;
-import com.google.android.gms.ads.ResponseInfo;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
@@ -40,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
     PieChart pieChart;
     static ArrayList<Statewise> stateList = new ArrayList<>();
-    private AdView mAdView;
     private InterstitialAd mInterstitialAd;
 
     @Override
@@ -72,33 +66,24 @@ public class MainActivity extends AppCompatActivity {
 
         loadIntAd();
 
-        title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mInterstitialAd != null) {
-                    mInterstitialAd.show(MainActivity.this);
-                } else {
-                    Log.d("TAG", "The interstitial ad wasn't ready yet.");
-                }
+        title.setOnClickListener(view -> {
+            if (mInterstitialAd != null) {
+                mInterstitialAd.show(MainActivity.this);
+            } else {
+                Log.d("TAG", "The interstitial ad wasn't ready yet.");
             }
         });
 
-        whoLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://www.mohfw.gov.in/"));
-                startActivity(intent);
-            }
+        whoLink.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://www.mohfw.gov.in/"));
+            startActivity(intent);
         });
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
+        MobileAds.initialize(this, initializationStatus -> {
         });
 
-        mAdView = findViewById(R.id.adView);
+        AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
@@ -111,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onAdFailedToLoad(LoadAdError adError) {
+            public void onAdFailedToLoad(@NotNull LoadAdError adError) {
                 // Code to be executed when an ad request fails.
                 super.onAdFailedToLoad(adError);
                 Log.d("TAG ADERROR", adError.toString());
@@ -147,8 +132,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class Content extends AsyncTask<Void, Void, Void> {
-        String active, recov, death, worldCases;
-        long IndCases;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -161,18 +144,17 @@ public class MainActivity extends AppCompatActivity {
                 Call<RootData> list = RetrofitClient.getInstance().getMyApi().getTeams();
                 list.enqueue(new Callback<RootData>() {
                     @Override
-                    public void onResponse(Call<RootData> call, Response<RootData> response) {
+                    public void onResponse(@NotNull Call<RootData> call, @NotNull Response<RootData> response) {
                         if (response.isSuccessful()) {
-                            Log.d("NETCALL", "success");
+                            assert response.body() != null;
                             ArrayList<Statewise> ll = new ArrayList<>(response.body().statewise);
-                            Log.d("NETCALL size", String.valueOf(ll.size()));
                             setList(ll);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<RootData> call, Throwable t) {
-                        Log.d("NetCall", t.getLocalizedMessage());
+                    public void onFailure(@NotNull Call<RootData> call, @NotNull Throwable t) {
+                        Log.d("NetCall", Objects.requireNonNull(t.getLocalizedMessage()));
                     }
                 });
             }catch (Exception e){
@@ -192,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
     private void setList(ArrayList<Statewise> ll) {
         for (int i = 0; i < ll.size(); i++) {
             stateList.add(ll.get(i));
-            Log.d("state " + (i + 1), stateList.get(i).state);
         }
         stateListAdapter adapter = new stateListAdapter(getApplicationContext(), R.layout.table_elements, stateList);
         listView.setAdapter(adapter);

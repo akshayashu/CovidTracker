@@ -13,6 +13,7 @@
         android:layout_height="300dp"
         android:layout_marginTop="100dp"
         android:layout_gravity="center"
+        android:contentDescription="@string/todo"
         android:src="@drawable/covid_19"/>
 
     <TextView
@@ -20,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="@font/arapey"
-        android:text="CovidTracker"
+        android:text="@string/covidtracker"
         android:textColor="#FFFFFF"
         android:textSize="40sp" />
     <LinearLayout
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/arapey"
-            android:text="Please wait, fetching the data.."
+            android:text="@string/please_wait_fetching_the_data"
             android:textColor="#FFFFFF"
             android:textSize="18sp"/>
         <ProgressBar
