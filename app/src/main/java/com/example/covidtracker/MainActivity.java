@@ -25,6 +25,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
@@ -34,6 +35,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -80,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+//        52BAFE009D021C9617F685511393D2B5
+//        RequestConfiguration configuration = new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("52BAFE009D021C9617F685511393D2B5")).build();
+//        MobileAds.setRequestConfiguration(configuration);
         MobileAds.initialize(this, initializationStatus -> {
         });
 
@@ -173,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setList(ArrayList<Statewise> ll) {
         for (int i = 0; i < ll.size(); i++) {
+            Log.d("States", ll.get(i).state);
             stateList.add(ll.get(i));
         }
         stateListAdapter adapter = new stateListAdapter(getApplicationContext(), R.layout.table_elements, stateList);
